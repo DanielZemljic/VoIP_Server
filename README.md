@@ -4,7 +4,8 @@
 
 
 ## Getting started with deno
-![alt text]https://github.com/denoland/deno/blob/master/docs/images/deno3.png "DENO Logo")
+![alt text][logo]
+
 
 ### Installation
 
@@ -25,3 +26,4 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 ```
 deno run https://deno.land/std/examples/welcome.ts
 ```
+[logo]: https://github.com/denoland/deno/blob/master/docs/images/deno3.png "Deno Logo"
