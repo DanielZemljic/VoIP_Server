@@ -1,11 +1,9 @@
 # VoIP_Server
 ## Features
-
+![alt text](https://github.com/denoland/deno/blob/master/docs/images/deno3.png)
 
 
 ## Getting started with deno
-![alt text][logo]
-
 
 ### Installation
 
@@ -23,7 +21,13 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 ```
 
 ### Run a simple program:
+
+deno
 ```
 deno run https://deno.land/std/examples/welcome.ts
 ```
-[logo]: https://github.com/denoland/deno/blob/master/docs/images/deno3.png "Deno Logo"
+
+aleph
+```
+aleph dev
+```
