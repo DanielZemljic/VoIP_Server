@@ -3,27 +3,52 @@
  */
 
 import {
-  BackendComponent,
-  HTTP_COMP_TYPES,
+  ComponentType,
+  HttpBackendComponent,
+  HttpBackendComponentMethod,
   prepareComponentPath,
-} from "../shared.ts";
+} from "../shared/shared.ts";
 
 /**
- *  Please define which HTTP method and base path the component should be registered with
+ * Initialize phone states
+ * @param state 
  */
-const HTTP_COMP_METHOD = HTTP_COMP_TYPES.PUT;
-const HTTP_COMP_PATH = prepareComponentPath("/sipbell/");
-const HTTP_COMP_HANDLER = (ctx: any) => {
-  ctx.response.body = "<html><body><h1>SIPBell Body</h1></body></html>";
-  // POC -> just update the configuration
-  // state.counter = state.counter++ ? state.counter : 1;
+const initComponent = (state: any) => {
+  state.work = 0;
+  state.office = 0;
 };
 
-// define BackendComponent
-const component: BackendComponent = {
-  method: HTTP_COMP_METHOD,
-  path: HTTP_COMP_PATH,
-  handler: HTTP_COMP_HANDLER,
+/**
+ * Please return a function which will handle the HTTP request
+ *  The returned function will get handed over to oak Router instance
+ *  We just need to scope ones the compinatin state object,
+ *  therefore we return a function
+ * 
+ * @param state compination state passed from server level
+ * @returns oak Router handler function
+ */
+const httpComponentHandler = (state: any) =>
+  (ctx: any) => {
+    ctx.response.body = "<html><body><h1>SIPBell Body</h1></body></html>";
+    if (state.work === 1) {
+      state.work = 1;
+      state.office = 0;
+    } else {
+      state.work = 0;
+      state.office = 1;
+    }
+  };
+
+/** 
+ * Define new HttpBackendComponent and export it for registering it later
+*/
+const component: HttpBackendComponent = {
+  name: "sipbell",
+  type: ComponentType.HTTP,
+  method: HttpBackendComponentMethod.PUT,
+  path: prepareComponentPath("/sipbell/"),
+  init: initComponent,
+  handler: httpComponentHandler,
 };
 
 export default component;
